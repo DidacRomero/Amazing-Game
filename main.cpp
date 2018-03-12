@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 	//Set the Renderer
 	renderer = SDL_CreateRenderer(window, -1, 0);
 
-	int xspeed = 0, yspeed = 1, bulletSpeed = 2;
+	float xspeed = 0, yspeed = 1, bulletSpeed = 2;
 	int bulletArrPos = 0;
 	bool exitLoop = false;
 	bool renderShot = false;
@@ -139,7 +139,7 @@ int main(int argc, char* argv[])
 			}
 			if (upPressed == true)
 			{
-				redRect.y += xspeed;
+				redRect.y += yspeed;
 			}
 			if (rightPressed == false && leftPressed == false)
 			{
@@ -154,14 +154,29 @@ int main(int argc, char* argv[])
 
 			//Logic GRAVITY
 
-			if (redRect.y + 150 >= greenRect.y && grounded == false)
+			if (redRect.y + 150 >= greenRect.y)
 			{
 				grounded = true;
 			}
-			
+			if (redRect.y + 150 < greenRect.y)
+			{
+				grounded = false;
+			}
 			if (grounded == true)
 			{
 				yspeed = 0;
+			}
+			if (grounded == true && upPressed == true)
+			{
+				yspeed = -1.4;
+			}
+			if (grounded == true && upPressed == true && leftPressed == true)
+			{
+				yspeed = -1.4;
+			}
+			if (grounded == false)
+			{
+				yspeed += 0.01;
 			}
 
 
