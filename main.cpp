@@ -30,6 +30,9 @@ int main(int argc, char* argv[])
 	greenRect.w = 1280;
 	greenRect.h = 100;
 
+	SDL_Rect uKnuck[5000];
+	
+
 	//Set the Window
 	window = SDL_CreateWindow(
 		"Best Game EVER!",                   // window title
@@ -42,12 +45,12 @@ int main(int argc, char* argv[])
 	//Set the Renderer
 	renderer = SDL_CreateRenderer(window, -1, 0);
 
-	float xspeed = 0, yspeed = 1, bulletSpeed = 2;
-	int bulletArrPos = 0;
+	float xspeed = 0, yspeed = 1, knuckSpeed = 0.5;
+	int ugandaArrPos = 0;
 	bool exitLoop = false;
 	bool renderShot = false;
 	bool leftPressed = false, rightPressed = false, upPressed = false, downPressed = false, spacePressed = false, grounded = false;
-
+	int time = 0;
 	//Set the PNG Background
 	SDL_Texture *back= nullptr;
 	SDL_Texture *ShipTexture = nullptr;
@@ -131,11 +134,11 @@ int main(int argc, char* argv[])
 			// Using the KeyPressed variables to change speed, thus position
 			if (leftPressed == true)
 			{
-				xspeed=-1;
+				xspeed=-2;
 			}
 			if (rightPressed == true)
 			{
-				xspeed=1;
+				xspeed= 2;
 			}
 			if (upPressed == true)
 			{
@@ -149,7 +152,6 @@ int main(int argc, char* argv[])
 			{
 				xspeed = 0;
 			}
-
 
 
 			//Logic GRAVITY
@@ -179,17 +181,45 @@ int main(int argc, char* argv[])
 				yspeed += 0.01;
 			}
 
+			if (time % 3000 == 0)
+			{
+				uKnuck[ugandaArrPos].x = 1300;
+				uKnuck[ugandaArrPos].y = 520;
+				ugandaArrPos++;
+			}
 
-
-			//Move the player
-			redRect.y += yspeed;
-			redRect.x += xspeed;
+		
+			if (time % 5 == 0)
+			{
+				//Move the player
+				redRect.y += yspeed;
+				redRect.x += xspeed;
+			}
 
 
 
 			//SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
 			SDL_RenderClear(renderer);
 			SDL_RenderCopy(renderer, back, NULL, NULL);
+
+			//Make Uganda great again
+			for (int i = 0; i <= ugandaArrPos; ++i)
+			{
+				uKnuck[i].w = 50;
+				uKnuck[i].h = 100;
+				if (time % 10 == 0)
+				{
+					uKnuck[i].x -= 0.1;
+				}
+				//SDL_RenderFillRect(renderer, &greenRect[i]);
+				if (uKnuck[i].x > 0)
+				{
+					//SDL_RenderCopy(renderer, laserTexture, NULL, &greenRect[i]);
+					SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+					SDL_RenderFillRect(renderer, &uKnuck[i]);
+				}
+			}
+
 
 
 
@@ -206,6 +236,7 @@ int main(int argc, char* argv[])
 			SDL_RenderPresent(renderer);
 			//Delay 5 milliseconds
 			//SDL_Delay(5);
+			time++;
 		}
 
 		SDL_DestroyTexture(back);
