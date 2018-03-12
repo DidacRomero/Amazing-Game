@@ -56,8 +56,8 @@ int main(int argc, char* argv[])
 	SDL_Texture *ShipTexture = nullptr;
 	SDL_Texture *laserTexture = nullptr;
 	SDL_Surface *Background = IMG_Load("background.png");
-	SDL_Surface *Ship = IMG_Load("ae86.png");
-	SDL_Surface *Laser = IMG_Load("laser.png");
+	SDL_Surface *Ship = IMG_Load("Goomba_Icon.png");
+	SDL_Surface *Laser = IMG_Load("ugandanKnuckels.png");
 	back = SDL_CreateTextureFromSurface(renderer,Background);
 	ShipTexture = SDL_CreateTextureFromSurface(renderer,Ship);
 	laserTexture = SDL_CreateTextureFromSurface(renderer, Laser);
@@ -205,7 +205,7 @@ int main(int argc, char* argv[])
 			//Make Uganda great again
 			for (int i = 0; i <= ugandaArrPos; ++i)
 			{
-				uKnuck[i].w = 50;
+				uKnuck[i].w = 100;
 				uKnuck[i].h = 100;
 				if (time % 10 == 0)
 				{
@@ -214,9 +214,9 @@ int main(int argc, char* argv[])
 				//SDL_RenderFillRect(renderer, &greenRect[i]);
 				if (uKnuck[i].x > 0)
 				{
-					//SDL_RenderCopy(renderer, laserTexture, NULL, &greenRect[i]);
-					SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-					SDL_RenderFillRect(renderer, &uKnuck[i]);
+					SDL_RenderCopy(renderer, laserTexture, NULL, &uKnuck[i]);
+					//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+					//SDL_RenderFillRect(renderer, &uKnuck[i]);
 				}
 			}
 
