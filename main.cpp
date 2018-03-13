@@ -218,6 +218,10 @@ int main(int argc, char* argv[])
 					//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 					//SDL_RenderFillRect(renderer, &uKnuck[i]);
 				}
+				if (redRect.x+200 > uKnuck[i].x && redRect.x +200 < uKnuck[i].x +100 && uKnuck[i].y - redRect.y > 50 && uKnuck[i].y - redRect.y < 100)
+				{
+					uKnuck[i].x = -1000;
+				}
 			}
 
 
