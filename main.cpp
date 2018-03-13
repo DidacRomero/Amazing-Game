@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
 	//Set the Window
 	window = SDL_CreateWindow(
-		"Best Game EVER!",                   // window title
+		"Goomba completes his wet dream",                   // window title
 		SDL_WINDOWPOS_CENTERED,             // initial x position
 		SDL_WINDOWPOS_CENTERED,            // initial y position
 		1280,                             // width, in pixels
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 
 	//Initialize wav sounds
 	Mix_Chunk *shot = nullptr;
-	shot = Mix_LoadWAV("spshot.wav");
+	shot = Mix_LoadWAV("daWae.wav");
 
 	if (back==nullptr || ShipTexture==nullptr|| Laser==nullptr)
 	{
@@ -181,8 +181,9 @@ int main(int argc, char* argv[])
 				yspeed += 0.01;
 			}
 
-			if (time % 3000 == 0)
+			if (time % 5000 == 0)
 			{
+				Mix_PlayChannel(2, shot, 0);
 				uKnuck[ugandaArrPos].x = 1300;
 				uKnuck[ugandaArrPos].y = 520;
 				ugandaArrPos++;
@@ -218,7 +219,9 @@ int main(int argc, char* argv[])
 					//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 					//SDL_RenderFillRect(renderer, &uKnuck[i]);
 				}
-				if (redRect.x+200 > uKnuck[i].x && redRect.x +200 < uKnuck[i].x +100 && uKnuck[i].y - redRect.y > 50 && uKnuck[i].y - redRect.y < 100)
+				if (redRect.x+200 > uKnuck[i].x && redRect.x +200 < uKnuck[i].x +100 && uKnuck[i].y - redRect.y > 50 && uKnuck[i].y - redRect.y < 100 ||
+					redRect.x < uKnuck[i].x - 200 && redRect.x > uKnuck[i].x - 100 && uKnuck[i].y - redRect.y > 50 && uKnuck[i].y - redRect.y < 100
+					)
 				{
 					uKnuck[i].x = -1000;
 				}
