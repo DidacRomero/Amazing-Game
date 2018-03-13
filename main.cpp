@@ -65,13 +65,15 @@ int main(int argc, char* argv[])
 	//Initialize music sounds
 	Mix_Music *bgm=nullptr;
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
-	bgm = Mix_LoadMUS("bgmusic.ogg");
+	bgm = Mix_LoadMUS("bgsmusic.ogg");
 	Mix_VolumeMusic(100);
-	//Mix_PlayMusic(bgm,-1);
+	Mix_PlayMusic(bgm,-1);
 
 	//Initialize wav sounds
 	Mix_Chunk *shot = nullptr;
 	shot = Mix_LoadWAV("daWae.wav");
+	Mix_Chunk *notwae = nullptr;
+	notwae = Mix_LoadWAV("notknow.wav");
 
 	if (back==nullptr || ShipTexture==nullptr|| Laser==nullptr)
 	{
@@ -124,6 +126,7 @@ int main(int argc, char* argv[])
 						break;
 						//Shoot a green laser
 					case SDLK_SPACE:
+						Mix_PlayChannel(5, notwae, 0);
 						spacePressed = true;
 						break;
 
@@ -152,7 +155,7 @@ int main(int argc, char* argv[])
 			{
 				xspeed = 0;
 			}
-
+			
 
 			//Logic GRAVITY
 
